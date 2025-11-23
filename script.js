@@ -59,59 +59,23 @@ document.addEventListener('DOMContentLoaded', function() {
     observer.observe(el);
   });
 
-  // FAQ интерактивность
-  document.querySelectorAll('#faq .card').forEach(function(card) {
-    const title = card.querySelector('h3');
-    const content = card.querySelector('p');
-    
-    // Скрываем содержимое по умолчанию
-    content.style.display = 'none';
-    content.style.marginTop = '10px';
-    content.style.color = 'var(--muted)';
-    content.style.fontSize = '14px';
-    
-    // Добавляем кликабельность
-    title.style.cursor = 'pointer';
-    title.style.position = 'relative';
-    
-    // Добавляем стрелку
-    title.innerHTML += ' <span style="float:right;transition:transform 0.3s">▼</span>';
-    
-    title.addEventListener('click', function() {
-      if (content.style.display === 'none') {
-        content.style.display = 'block';
-        title.querySelector('span').style.transform = 'rotate(180deg)';
-      } else {
-        content.style.display = 'none';
-        title.querySelector('span').style.transform = 'rotate(0deg)';
-      }
-    });
-  });
+
 
   // Кнопка "Наверх"
   const scrollToTopBtn = document.createElement('button');
   scrollToTopBtn.innerHTML = '↑';
   scrollToTopBtn.className = 'scroll-to-top';
-  scrollToTopBtn.style.cssText = `
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent), var(--accent-2));
-    border: 1px solid var(--glass-border);
-    color: white;
-    font-size: 20px;
-    cursor: pointer;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-    z-index: 1000;
-    box-shadow: 0 8px 30px rgba(123,63,238,0.18);
-  `;
-  
   document.body.appendChild(scrollToTopBtn);
+
+  // Плавающая кнопка WhatsApp (FAB)
+  const fab = document.createElement('a');
+  fab.href = 'https://wa.me/79289335932?text=привет,%20хочу%20поговорить';
+  fab.target = '_blank';
+  fab.rel = 'noopener';
+  fab.className = 'fab-whatsapp';
+  fab.setAttribute('aria-label', 'Написать в WhatsApp');
+  fab.innerHTML = `<svg width="26" height="26" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path fill="white" d="M19.11 17.41c-.29-.14-1.72-.85-1.98-.95-.27-.1-.46-.14-.66.14-.2.29-.76.95-.93 1.14-.17.19-.34.21-.63.07-.29-.14-1.23-.45-2.34-1.44-.86-.76-1.44-1.7-1.61-1.99-.17-.29-.02-.45.13-.6.14-.14.29-.34.43-.51.14-.17.19-.29.29-.48.1-.19.05-.36-.02-.51-.07-.14-.66-1.59-.9-2.18-.24-.58-.48-.5-.66-.51l-.56-.01c-.19 0-.51.07-.78.36-.27.29-1.03 1.01-1.03 2.46 0 1.45 1.06 2.85 1.21 3.05.15.19 2.08 3.18 5.03 4.46.7.3 1.25.48 1.67.62.7.22 1.34.19 1.85.11.56-.08 1.72-.7 1.97-1.38.24-.68.24-1.26.17-1.38-.07-.12-.26-.19-.55-.33z"/><path fill="white" d="M26.01 5.99C23.19 3.18 19.7 1.65 16 1.65 8.64 1.65 2.69 7.6 2.69 14.96c0 2.34.61 4.61 1.76 6.62L2 30l8.6-2.25c1.95 1.06 4.16 1.62 6.41 1.62 7.36 0 13.31-5.95 13.31-13.31 0-3.7-1.53-7.19-4.31-10.07zM16.99 27.5c-2.04 0-4.04-.55-5.78-1.59l-.41-.24-5.09 1.33 1.36-4.96-.26-.42c-1.09-1.77-1.67-3.81-1.67-5.9C5.16 8.44 10.05 3.55 16 3.55c3.56 0 6.9 1.38 9.41 3.89 2.51 2.51 3.89 5.85 3.89 9.41 0 7.74-6.27 10.65-12.31 10.65z"/></svg>`;
+  document.body.appendChild(fab);
   
   window.addEventListener('scroll', function() {
     if (window.pageYOffset > 300) {
@@ -147,57 +111,29 @@ document.addEventListener('DOMContentLoaded', function() {
     updateCounter();
   }
 
-  // Добавляем секцию статистики
-  const statsSection = document.createElement('section');
-  statsSection.style.cssText = `
-    margin-top: 40px;
-    text-align: center;
-  `;
-  
-  statsSection.innerHTML = `
-    <h2>Мои достижения</h2>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 26px;">
-      <div class="card" style="text-align: center;">
-        <h3 style="font-size: 36px; margin: 0; color: var(--accent);" data-count="500">0</h3>
-        <p style="margin: 8px 0 0 0; color: var(--muted);">Проведённых сессий</p>
-      </div>
-      <div class="card" style="text-align: center;">
-        <h3 style="font-size: 36px; margin: 0; color: var(--accent-2);" data-count="8">0</h3>
-        <p style="margin: 8px 0 0 0; color: var(--muted);">Лет опыта</p>
-      </div>
-      <div class="card" style="text-align: center;">
-        <h3 style="font-size: 36px; margin: 0; color: var(--accent);" data-count="95">0</h3>
-        <p style="margin: 8px 0 0 0; color: var(--muted);">% Успешных результатов</p>
-      </div>
-      <div class="card" style="text-align: center;">
-        <h3 style="font-size: 36px; margin: 0; color: var(--accent-2);" data-count="200">0</h3>
-        <p style="margin: 8px 0 0 0; color: var(--muted);">Довольных клиентов</p>
-      </div>
-    </div>
-  `;
-  
-  // Вставляем секцию статистики после FAQ
-  const faqSection = document.getElementById('faq');
-  faqSection.parentNode.insertBefore(statsSection, faqSection.nextSibling);
+  // Находим секцию статистики
+  const statsSection = document.getElementById('stats');
 
   // Анимируем счетчики при видимости
-  const statsObserver = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        const counters = entry.target.querySelectorAll('[data-count]');
-        counters.forEach(function(counter) {
-          const target = parseInt(counter.getAttribute('data-count'));
-          animateCounter(counter, target);
-        });
-        statsObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.5 });
+  if (statsSection) {
+    const statsObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          const counters = entry.target.querySelectorAll('[data-count]');
+          counters.forEach(function(counter) {
+            const target = parseInt(counter.getAttribute('data-count'));
+            animateCounter(counter, target);
+          });
+          statsObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
 
-  statsObserver.observe(statsSection);
+    statsObserver.observe(statsSection);
+  }
 
-  // Анимация loading для кнопок WhatsApp
-  document.querySelectorAll('a[href*="wa.me"]').forEach(function(btn) {
+  // Анимация loading для кнопок WhatsApp (кроме плавающей FAB)
+  document.querySelectorAll('a[href*="wa.me"]:not(.fab-whatsapp)').forEach(function(btn) {
     btn.addEventListener('click', function(e) {
       const originalText = this.textContent;
       this.textContent = 'Открываю WhatsApp...';
@@ -349,321 +285,40 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Интерактивная форма обратной связи
-  function createContactForm() {
-    const formModal = document.createElement('div');
-    formModal.className = 'form-modal';
-    formModal.style.cssText = `
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 10000;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-    `;
 
-    const formContent = document.createElement('div');
-    formContent.className = 'form-content';
-    formContent.style.cssText = `
-      background: linear-gradient(135deg, var(--card), rgba(255,255,255,0.02));
-      border: 1px solid var(--glass-border);
-      border-radius: 20px;
-      padding: 30px;
-      max-width: 500px;
-      width: 90%;
-      max-height: 80vh;
-      overflow-y: auto;
-      position: relative;
-      backdrop-filter: blur(8px);
-      transform: scale(0.8);
-      transition: transform 0.3s ease;
-    `;
-
-    formContent.innerHTML = `
-      <button class="form-close" style="
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        background: none;
-        border: none;
-        color: var(--muted);
-        font-size: 24px;
-        cursor: pointer;
-        padding: 5px;
-        border-radius: 50%;
-        transition: all 0.3s ease;
-      ">×</button>
-      <h3 style="margin-top: 0; color: var(--text);">Записаться на консультацию</h3>
-      
-      <form id="contactForm" style="margin-top: 20px;">
-        <div style="margin-bottom: 15px;">
-          <label style="display: block; margin-bottom: 5px; color: var(--muted);">Имя *</label>
-          <input type="text" name="name" required style="
-            width: 100%;
-            padding: 12px;
-            border: 1px solid var(--glass-border);
-            border-radius: 8px;
-            background: rgba(255,255,255,0.02);
-            color: var(--text);
-            font-size: 14px;
-            outline: none;
-            transition: border-color 0.3s ease;
-          ">
-        </div>
-        
-        <div style="margin-bottom: 15px;">
-          <label style="display: block; margin-bottom: 5px; color: var(--muted);">Телефон *</label>
-          <input type="tel" name="phone" required style="
-            width: 100%;
-            padding: 12px;
-            border: 1px solid var(--glass-border);
-            border-radius: 8px;
-            background: rgba(255,255,255,0.02);
-            color: var(--text);
-            font-size: 14px;
-            outline: none;
-            transition: border-color 0.3s ease;
-          " placeholder="+7 (999) 123-45-67">
-        </div>
-        
-        <div style="margin-bottom: 15px;">
-          <label style="display: block; margin-bottom: 5px; color: var(--muted);">Email</label>
-          <input type="email" name="email" style="
-            width: 100%;
-            padding: 12px;
-            border: 1px solid var(--glass-border);
-            border-radius: 8px;
-            background: rgba(255,255,255,0.02);
-            color: var(--text);
-            font-size: 14px;
-            outline: none;
-            transition: border-color 0.3s ease;
-          " placeholder="example@email.com">
-        </div>
-        
-        <div style="margin-bottom: 15px;">
-          <label style="display: block; margin-bottom: 5px; color: var(--muted);">Услуга</label>
-          <select name="service" style="
-            width: 100%;
-            padding: 12px;
-            border: 1px solid var(--glass-border);
-            border-radius: 8px;
-            background: rgba(255,255,255,0.02);
-            color: var(--text);
-            font-size: 14px;
-            outline: none;
-            transition: border-color 0.3s ease;
-          ">
-            <option value="">Выберите услугу</option>
-            <option value="hypnosis">Гипнокоучинг</option>
-            <option value="energy">Энергетическая чистка</option>
-            <option value="shaman">Шаманские практики</option>
-          </select>
-        </div>
-        
-        <div style="margin-bottom: 20px;">
-          <label style="display: block; margin-bottom: 5px; color: var(--muted);">Сообщение</label>
-          <textarea name="message" rows="4" style="
-            width: 100%;
-            padding: 12px;
-            border: 1px solid var(--glass-border);
-            border-radius: 8px;
-            background: rgba(255,255,255,0.02);
-            color: var(--text);
-            font-size: 14px;
-            outline: none;
-            transition: border-color 0.3s ease;
-            resize: vertical;
-          " placeholder="Расскажите о своих целях и ожиданиях..."></textarea>
-        </div>
-        
-        <button type="submit" class="btn" style="
-          width: 100%;
-          padding: 14px;
-          border: none;
-          border-radius: 12px;
-          background: linear-gradient(90deg, var(--accent), var(--accent-2));
-          color: white;
-          font-weight: 700;
-          font-size: 16px;
-          cursor: pointer;
-          transition: all 0.3s ease;
-        ">Отправить заявку</button>
-      </form>
-    `;
-
-    formModal.appendChild(formContent);
-    document.body.appendChild(formModal);
-
-    // Открытие формы
-    setTimeout(() => {
-      formModal.style.opacity = '1';
-      formModal.style.visibility = 'visible';
-      formContent.style.transform = 'scale(1)';
-    }, 10);
-
-    // Закрытие формы
-    const closeForm = () => {
-      formModal.style.opacity = '0';
-      formModal.style.visibility = 'hidden';
-      formContent.style.transform = 'scale(0.8)';
-      setTimeout(() => {
-        document.body.removeChild(formModal);
-      }, 300);
-    };
-
-    formContent.querySelector('.form-close').addEventListener('click', closeForm);
-    formModal.addEventListener('click', function(e) {
-      if (e.target === formModal) {
-        closeForm();
-      }
-    });
-
-    // Обработка формы
-    const form = formContent.querySelector('#contactForm');
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      const formData = new FormData(form);
-      const data = Object.fromEntries(formData);
-      
-      // Показываем индикатор загрузки
-      const submitBtn = form.querySelector('button[type="submit"]');
-      const originalText = submitBtn.textContent;
-      submitBtn.textContent = 'Отправляем...';
-      submitBtn.disabled = true;
-      
-      // Симуляция отправки
-      setTimeout(() => {
-        submitBtn.textContent = '✅ Отправлено!';
-        submitBtn.style.background = 'linear-gradient(90deg, #10b981, #059669)';
-        
-        // Создаем сообщение для WhatsApp
-        const whatsappMessage = `Заявка на консультацию:
-Имя: ${data.name}
-Телефон: ${data.phone}
-${data.email ? `Email: ${data.email}` : ''}
-${data.service ? `Услуга: ${data.service}` : ''}
-${data.message ? `Сообщение: ${data.message}` : ''}`;
-        
-        const whatsappUrl = `https://wa.me/79289335932?text=${encodeURIComponent(whatsappMessage)}`;
-        
-        setTimeout(() => {
-          closeForm();
-          window.open(whatsappUrl, '_blank');
-        }, 1500);
-      }, 2000);
-    });
-
-    // Стили для фокуса на полях
-    formContent.querySelectorAll('input, textarea, select').forEach(function(field) {
-      field.addEventListener('focus', function() {
-        this.style.borderColor = 'var(--accent)';
-        this.style.boxShadow = '0 0 0 3px rgba(155,107,255,0.1)';
-      });
-      
-      field.addEventListener('blur', function() {
-        this.style.borderColor = 'var(--glass-border)';
-        this.style.boxShadow = 'none';
-      });
-    });
-  }
-
-  // Добавляем кнопку "Записаться" в контактную секцию
-  const contactSection = document.getElementById('contact');
-  const contactCard = contactSection.querySelector('.card');
-  
-  const recordBtn = document.createElement('button');
-  recordBtn.textContent = 'Заполнить форму записи';
-  recordBtn.className = 'btn';
-  recordBtn.style.cssText = `
-    margin-top: 15px;
-    width: 100%;
-    padding: 14px;
-    border: none;
-    border-radius: 12px;
-    background: linear-gradient(90deg, var(--accent), var(--accent-2));
-    color: white;
-    font-weight: 700;
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  `;
-  
-  contactCard.appendChild(recordBtn);
-  
-  recordBtn.addEventListener('click', createContactForm);
 
   // Popup с предложением записи (появляется через 30 секунд)
   setTimeout(function() {
     if (!localStorage.getItem('popupShown')) {
       const popup = document.createElement('div');
       popup.className = 'exit-popup';
-      popup.style.cssText = `
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) scale(0);
-        background: linear-gradient(135deg, var(--card), rgba(255,255,255,0.02));
-        border: 1px solid var(--glass-border);
-        border-radius: 20px;
-        padding: 30px;
-        max-width: 400px;
-        width: 90%;
-        z-index: 10000;
-        backdrop-filter: blur(8px);
-        transition: transform 0.3s ease;
-        box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-      `;
       
       popup.innerHTML = `
-        <button class="popup-close" style="
-          position: absolute;
-          top: 10px;
-          right: 10px;
-          background: none;
-          border: none;
-          color: var(--muted);
-          font-size: 18px;
-          cursor: pointer;
-        ">×</button>
+        <button class="popup-close">×</button>
         <div style="text-align: center;">
           <h4 style="margin-top: 0; color: var(--text);">Хотите получить консультацию?</h4>
-          <p style="color: var(--muted); margin: 15px 0;">Запишитесь на первую сессию со скидкой 20%</p>
-          <button class="btn popup-btn">Записаться со скидкой</button>
+          <p style="color: var(--muted); margin: 15px 0;">Бесплатная 15-минутная онлайн-консультация</p>
+          <a href="https://wa.me/79289335932?text=Хочу%20записаться%20на%20консультацию" target="_blank" class="btn popup-btn">Написать в WhatsApp</a>
         </div>
       `;
       
       document.body.appendChild(popup);
       
       setTimeout(() => {
-        popup.style.transform = 'translate(-50%, -50%) scale(1)';
+        popup.classList.add('show');
       }, 10);
       
       // Закрытие popup
       popup.querySelector('.popup-close').addEventListener('click', function() {
-        popup.style.transform = 'translate(-50%, -50%) scale(0)';
+        popup.classList.remove('show');
         setTimeout(() => document.body.removeChild(popup), 300);
+        localStorage.setItem('popupShown', 'true');
       });
       
-      // Кнопка записи
+      // При клике на кнопку WhatsApp тоже закрываем
       popup.querySelector('.popup-btn').addEventListener('click', function() {
-        popup.style.transform = 'translate(-50%, -50%) scale(0)';
-        setTimeout(() => {
-          document.body.removeChild(popup);
-          createContactForm();
-        }, 300);
+        localStorage.setItem('popupShown', 'true');
       });
-      
-      // Отмечаем, что popup показан
-      localStorage.setItem('popupShown', 'true');
     }
   }, 30000);
 });
