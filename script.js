@@ -165,7 +165,7 @@ function initStatsCounter() {
  */
 function initWhatsAppFAB() {
   const fab = document.createElement('a');
-  fab.href = 'https://wa.me/79289335932?text=привет,%20хочу%20поговорить';
+  fab.href = 'https://wa.me/79289335932?text=Здравствуйте!%20Интересует%20гипнотерапия%20и%20энергетические%20практики';
   fab.target = '_blank';
   fab.rel = 'noopener';
   fab.className = 'fab-whatsapp';
@@ -277,7 +277,7 @@ function initExitPopup() {
         'Хотите получить консультацию?',
         'Бесплатная 15-минутная онлайн-консультация',
         'Написать в WhatsApp',
-        'https://wa.me/79289335932?text=Хочу%20записаться%20на%20консультацию'
+        'https://wa.me/79289335932?text=Здравствуйте!%20Хочу%20получить%20бесплатную%2015-минутную%20консультацию'
       );
       
       showPopup(popup);

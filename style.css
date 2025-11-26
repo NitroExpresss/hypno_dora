@@ -79,12 +79,6 @@ label {
   padding: 28px;
 }
 
-.grid-2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 18px;
-}
-
 /* ========================================
    HEADER И НАВИГАЦИЯ
    ======================================== */
@@ -564,25 +558,7 @@ footer {
   color: var(--text-secondary);
 }
 
-.about-logo-container {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
-.about-logo {
-  width: 140px;
-  height: 140px;
-  border-radius: 18px;
-  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  color: white;
-  box-shadow: 0 12px 40px var(--shadow-color);
-}
 
 .review-text {
   margin: 6px 0 0 0;
@@ -783,17 +759,8 @@ footer {
     display: none;
   }
 
-  .grid-2 {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
   .services {
     grid-template-columns: 1fr;
-  }
-
-  .about-logo-container {
-    margin-top: 20px;
   }
 
   .fab-whatsapp {
